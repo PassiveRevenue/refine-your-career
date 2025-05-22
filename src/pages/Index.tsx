@@ -9,7 +9,6 @@ import { useResumeAnalysis } from '@/hooks/useResumeAnalysis';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Calendar, Check, SearchCheck, Star, Megaphone } from 'lucide-react';
-
 const Index = () => {
   const {
     files,
@@ -24,11 +23,8 @@ const Index = () => {
     completeAd,
     closeAd
   } = useResumeAnalysis();
-  
   const [activeTab, setActiveTab] = useState<string>("analyze");
-
-  return (
-    <div className="flex flex-col min-h-screen">
+  return <div className="flex flex-col min-h-screen">
       <Header />
       
       <main className="flex-grow">
@@ -41,26 +37,20 @@ const Index = () => {
               Get instant, professional feedback on your resume and cover letter. 
               Optimize for ATS systems and stand out to hiring managers.
             </p>
-            <p className="text-xl font-semibold text-brand-600 mb-8 max-w-2xl mx-auto">
-              Don't let a weak resume hold you back.
-            </p>
+            <p className="text-xl font-semibold text-brand-600 mb-8 max-w-2xl mx-auto">Your career deserves a powerful first impression</p>
             
             <div className="flex flex-wrap gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="bg-brand-600 hover:bg-brand-700"
-                onClick={() => document.getElementById('analyze-section')?.scrollIntoView({ behavior: 'smooth' })}
-              >
+              <Button size="lg" className="bg-brand-600 hover:bg-brand-700" onClick={() => document.getElementById('analyze-section')?.scrollIntoView({
+              behavior: 'smooth'
+            })}>
                 Analyze My Resume
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                onClick={() => {
-                  setActiveTab("pricing");
-                  document.getElementById('features-section')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
+              <Button size="lg" variant="outline" onClick={() => {
+              setActiveTab("pricing");
+              document.getElementById('features-section')?.scrollIntoView({
+                behavior: 'smooth'
+              });
+            }}>
                 View Pricing
               </Button>
             </div>
@@ -117,44 +107,29 @@ const Index = () => {
               </div>
               
               <TabsContent value="analyze" className="max-w-4xl mx-auto">
-                {!results ? (
-                  <div className="bg-background rounded-xl shadow-sm border p-6">
+                {!results ? <div className="bg-background rounded-xl shadow-sm border p-6">
                     <h2 className="text-2xl font-bold mb-4">Upload Your Resume</h2>
                     <p className="text-muted-foreground mb-4">
                       Our AI will analyze your resume and provide instant feedback on formatting, keywords, and content.
                     </p>
                     
-                    <FileUploadArea 
-                      onFilesSelected={handleFileUpload}
-                      onClear={clearFiles}
-                      files={files}
-                      disabled={isAnalyzing}
-                    />
+                    <FileUploadArea onFilesSelected={handleFileUpload} onClear={clearFiles} files={files} disabled={isAnalyzing} />
                     
-                    {files.length > 0 && (
-                      <div className="mt-6 text-center">
-                        <Button 
-                          onClick={analyzeResume}
-                          disabled={isAnalyzing || files.length === 0}
-                          className="bg-brand-600 hover:bg-brand-700"
-                          size="lg"
-                        >
+                    {files.length > 0 && <div className="mt-6 text-center">
+                        <Button onClick={analyzeResume} disabled={isAnalyzing || files.length === 0} className="bg-brand-600 hover:bg-brand-700" size="lg">
                           {isAnalyzing ? 'Analyzing...' : 'Analyze My Resume'}
                         </Button>
                         
-                        {isAnalyzing && (
-                          <div className="mt-6">
+                        {isAnalyzing && <div className="mt-6">
                             <p className="text-sm text-muted-foreground mb-2">
                               {progress < 100 ? 'Analyzing your resume...' : 'Analysis complete!'}
                             </p>
                             <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
-                              <div 
-                                className="progress-bar" 
-                                style={{ width: `${progress}%` }}
-                              />
+                              <div className="progress-bar" style={{
+                        width: `${progress}%`
+                      }} />
                             </div>
-                          </div>
-                        )}
+                          </div>}
                         
                         <div className="mt-4 text-xs text-muted-foreground">
                           <div className="flex items-center justify-center gap-2">
@@ -162,19 +137,11 @@ const Index = () => {
                             <span>Free tier users must watch a brief advertisement before analysis</span>
                           </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <AnalysisResults result={results} />
-                )}
+                      </div>}
+                  </div> : <AnalysisResults result={results} />}
                 
                 {/* Ad Overlay Component */}
-                <AdOverlay 
-                  adState={adState} 
-                  onAdComplete={completeAd}
-                  onClose={closeAd}
-                />
+                <AdOverlay adState={adState} onAdComplete={completeAd} onClose={closeAd} />
               </TabsContent>
               
               <TabsContent value="pricing">
@@ -197,21 +164,17 @@ const Index = () => {
               Don't let a weak resume hold you back.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="bg-brand-600 hover:bg-brand-700"
-                onClick={() => document.getElementById('analyze-section')?.scrollIntoView({ behavior: 'smooth' })}
-              >
+              <Button size="lg" className="bg-brand-600 hover:bg-brand-700" onClick={() => document.getElementById('analyze-section')?.scrollIntoView({
+              behavior: 'smooth'
+            })}>
                 Try Free Analysis
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                onClick={() => {
-                  setActiveTab("pricing");
-                  document.getElementById('features-section')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
+              <Button size="lg" variant="outline" onClick={() => {
+              setActiveTab("pricing");
+              document.getElementById('features-section')?.scrollIntoView({
+                behavior: 'smooth'
+              });
+            }}>
                 View Premium Plans
               </Button>
             </div>
@@ -220,8 +183,6 @@ const Index = () => {
       </main>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
