@@ -1,56 +1,65 @@
 
 import React from 'react';
-import { Check, BadgeDollarSign, CreditCard } from 'lucide-react';
+import { Check, BadgeDollarSign, CreditCard, Ad } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PricingTier } from '../types';
 
 const PremiumFeatures: React.FC = () => {
   const pricingTiers: PricingTier[] = [
     {
-      name: 'Basic',
+      name: 'Free Basic',
       price: 'Free',
-      description: 'Essential resume feedback to get started',
+      description: 'One resume analysis per month',
       features: [
-        'Single resume analysis',
+        'One free resume analysis monthly',
         'Basic formatting feedback',
         'Keyword optimization tips',
-        'Content improvement suggestions'
-      ]
+        'Ad-supported experience'
+      ],
+      type: 'free',
+      adSupported: true
     },
     {
       name: 'Premium',
       price: '$9.99',
-      description: 'Advanced analysis for serious job seekers',
+      description: 'Unlimited advanced analysis',
       features: [
         'Unlimited resume analyses',
-        'ATS compatibility testing',
+        'Cover letter analysis',
+        'Advanced ATS compatibility testing',
         'Industry-specific keyword recommendations',
         'Downloadable detailed report',
-        'Section-by-section feedback'
+        'Section-by-section feedback',
+        'Ad-free experience'
       ],
-      isPopular: true
+      type: 'subscription',
+      isPopular: true,
+      duration: 'month'
     },
     {
-      name: 'Professional',
-      price: '$29.99',
-      description: 'Complete career support for professionals',
+      name: 'One-Week Pass',
+      price: '$4.99',
+      description: 'Full access for 7 days',
       features: [
-        'All Premium features',
+        'All Premium features for 7 days',
+        'Unlimited resume analyses',
         'Cover letter analysis',
-        'LinkedIn profile review',
-        'Expert rewriting suggestions',
-        'AI-generated personalization for job applications',
-        'Priority support'
-      ]
+        'ATS compatibility testing',
+        'Downloadable reports',
+        'Ad-free experience',
+        'No subscription required'
+      ],
+      type: 'one-time',
+      duration: '7 days'
     }
   ];
 
   return (
     <div className="py-12">
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold mb-4">Upgrade Your Job Search</h2>
+        <h2 className="text-3xl font-bold mb-4">Choose Your Plan</h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Get the competitive edge with our premium resume analysis tools
+          Get the competitive edge with our AI-powered resume analysis tools
         </p>
       </div>
       
@@ -72,12 +81,22 @@ const PremiumFeatures: React.FC = () => {
               </div>
             )}
             
+            {tier.adSupported && (
+              <div className="absolute top-0 left-0">
+                <div className="bg-yellow-500 text-white text-xs font-semibold px-3 py-1 rounded-br-lg flex items-center gap-1">
+                  <Ad className="h-3 w-3" />
+                  Ad Supported
+                </div>
+              </div>
+            )}
+            
             <div className="p-6">
               <div className="mb-4">
                 <h3 className="text-xl font-bold">{tier.name}</h3>
                 <div className="mt-2 flex items-baseline gap-1">
                   <span className="text-3xl font-bold">{tier.price}</span>
-                  {tier.price !== 'Free' && <span className="text-muted-foreground">/month</span>}
+                  {tier.type === 'subscription' && <span className="text-muted-foreground">/{tier.duration}</span>}
+                  {tier.type === 'one-time' && <span className="text-muted-foreground">/{tier.duration}</span>}
                 </div>
                 <p className="mt-2 text-sm text-muted-foreground">{tier.description}</p>
               </div>
@@ -98,9 +117,9 @@ const PremiumFeatures: React.FC = () => {
                       ? 'bg-brand-600 hover:bg-brand-700' 
                       : ''
                   }`}
-                  variant={tier.name === 'Basic' ? 'outline' : 'default'}
+                  variant={tier.name === 'Free Basic' ? 'outline' : 'default'}
                 >
-                  {tier.name === 'Basic' ? 'Current Plan' : 'Upgrade'}
+                  {tier.type === 'free' ? 'Current Plan' : tier.type === 'subscription' ? 'Subscribe Now' : 'Buy Now'}
                 </Button>
               </div>
             </div>
@@ -116,9 +135,9 @@ const PremiumFeatures: React.FC = () => {
             </div>
           </div>
           <div className="flex-grow text-center md:text-left">
-            <h3 className="text-xl font-bold mb-2">Money Back Guarantee</h3>
+            <h3 className="text-xl font-bold mb-2">100% Money Back Guarantee</h3>
             <p className="text-muted-foreground">
-              Not satisfied with our premium analysis? We offer a 14-day money-back guarantee, no questions asked.
+              Not satisfied with our premium analysis? We offer a 14-day money-back guarantee for all subscription plans, no questions asked.
             </p>
           </div>
           <div className="flex-shrink-0">

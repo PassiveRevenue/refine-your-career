@@ -5,10 +5,11 @@ import Footer from '@/components/Footer';
 import FileUploadArea from '@/components/FileUploadArea';
 import AnalysisResults from '@/components/AnalysisResults';
 import PremiumFeatures from '@/components/PremiumFeatures';
+import AdOverlay from '@/components/AdOverlay';
 import { useResumeAnalysis } from '@/hooks/useResumeAnalysis';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Calendar, Check, SearchCheck, Star } from 'lucide-react';
+import { Calendar, Check, SearchCheck, Star, Ad } from 'lucide-react';
 
 const Index = () => {
   const {
@@ -16,9 +17,13 @@ const Index = () => {
     results,
     isAnalyzing,
     progress,
+    adState,
     handleFileUpload,
     clearFiles,
-    analyzeResume
+    analyzeResume,
+    startAd,
+    completeAd,
+    closeAd
   } = useResumeAnalysis();
   
   const [activeTab, setActiveTab] = useState<string>("analyze");
@@ -55,6 +60,11 @@ const Index = () => {
               >
                 View Pricing
               </Button>
+            </div>
+            
+            <div className="mt-8 inline-flex items-center gap-2 text-muted-foreground text-sm bg-muted/50 px-3 py-1 rounded-full">
+              <Ad className="h-4 w-4 text-yellow-500" />
+              <span>Free tier now available with ad-supported analysis!</span>
             </div>
           </div>
         </section>
@@ -99,7 +109,7 @@ const Index = () => {
               <div className="flex justify-center mb-8">
                 <TabsList className="grid w-full max-w-md grid-cols-2">
                   <TabsTrigger value="analyze" id="analyze-section">Analyze Resume</TabsTrigger>
-                  <TabsTrigger value="pricing">Premium Features</TabsTrigger>
+                  <TabsTrigger value="pricing">Pricing Plans</TabsTrigger>
                 </TabsList>
               </div>
               
@@ -142,12 +152,26 @@ const Index = () => {
                             </div>
                           </div>
                         )}
+                        
+                        <div className="mt-4 text-xs text-muted-foreground">
+                          <div className="flex items-center justify-center gap-2">
+                            <Ad className="h-3 w-3 text-yellow-500" />
+                            <span>Free tier users must watch a brief advertisement before analysis</span>
+                          </div>
+                        </div>
                       </div>
                     )}
                   </div>
                 ) : (
                   <AnalysisResults result={results} />
                 )}
+                
+                {/* Ad Overlay Component */}
+                <AdOverlay 
+                  adState={adState} 
+                  onAdComplete={completeAd}
+                  onClose={closeAd}
+                />
               </TabsContent>
               
               <TabsContent value="pricing">
@@ -164,15 +188,27 @@ const Index = () => {
             </div>
             <h2 className="text-3xl font-bold mb-4">Start Improving Your Resume Today</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-              Don't let a weak resume hold back your career. Get professional feedback in minutes.
+              Try our free, ad-supported analysis or upgrade for premium features.
             </p>
-            <Button 
-              size="lg" 
-              className="bg-brand-600 hover:bg-brand-700"
-              onClick={() => document.getElementById('analyze-section')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Analyze My Resume
-            </Button>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Button 
+                size="lg" 
+                className="bg-brand-600 hover:bg-brand-700"
+                onClick={() => document.getElementById('analyze-section')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Try Free Analysis
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                onClick={() => {
+                  setActiveTab("pricing");
+                  document.getElementById('features-section')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                View Premium Plans
+              </Button>
+            </div>
           </div>
         </section>
       </main>

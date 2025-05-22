@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { FileInfo, AnalysisResult } from '../types';
+import { FileInfo, AnalysisResult, AdState } from '../types';
 import { useToast } from '@/hooks/use-toast';
 
 export function useResumeAnalysis() {
@@ -8,6 +8,11 @@ export function useResumeAnalysis() {
   const [progress, setProgress] = useState(0);
   const [files, setFiles] = useState<FileInfo[]>([]);
   const [results, setResults] = useState<AnalysisResult | null>(null);
+  const [adState, setAdState] = useState<AdState>({
+    required: true,
+    watched: false,
+    isPlaying: false
+  });
   const { toast } = useToast();
 
   const handleFileUpload = (newFiles: FileInfo[]) => {
@@ -20,6 +25,27 @@ export function useResumeAnalysis() {
     setResults(null);
   };
 
+  const startAd = () => {
+    setAdState(prev => ({ ...prev, isPlaying: true }));
+  };
+
+  const completeAd = () => {
+    setAdState({ required: false, watched: true, isPlaying: false });
+    toast({
+      title: "Thank you for watching",
+      description: "You can now proceed with your free resume analysis.",
+    });
+  };
+
+  const closeAd = () => {
+    // If user tries to close without watching
+    toast({
+      title: "Advertisement required",
+      description: "You must watch the advertisement to access your free analysis.",
+      variant: "destructive"
+    });
+  };
+
   const analyzeResume = async () => {
     if (files.length === 0) {
       toast({
@@ -27,6 +53,12 @@ export function useResumeAnalysis() {
         description: "Please upload a resume or cover letter first.",
         variant: "destructive"
       });
+      return;
+    }
+
+    // Check if ad is required and not watched yet
+    if (adState.required && !adState.watched) {
+      setAdState(prev => ({ ...prev, required: true }));
       return;
     }
     
@@ -104,8 +136,12 @@ export function useResumeAnalysis() {
     results,
     isAnalyzing,
     progress,
+    adState,
     handleFileUpload,
     clearFiles,
-    analyzeResume
+    analyzeResume,
+    startAd,
+    completeAd,
+    closeAd
   };
 }

@@ -28,4 +28,13 @@ export interface PricingTier {
   description: string;
   features: string[];
   isPopular?: boolean;
+  type: 'free' | 'subscription' | 'one-time';
+  adSupported?: boolean;
+  duration?: string;
+}
+
+export interface AdState {
+  required: boolean;
+  watched: boolean;
+  isPlaying: boolean;
 }
