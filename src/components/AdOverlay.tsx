@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { AdState } from '@/types';
 import { Button } from '@/components/ui/button';
@@ -102,7 +101,11 @@ const AdOverlay: React.FC<AdOverlayProps> = ({ adState, onAdComplete, onClose })
           
           <p className="text-sm text-muted-foreground mt-4 text-center">
             Watch this advertisement to unlock your free monthly resume analysis.
-            <br />
+          </p>
+          <p className="text-sm font-medium text-brand-600 mt-1 text-center">
+            Don't let a weak resume hold you back.
+          </p>
+          <p className="text-sm text-muted-foreground mt-4 text-center">
             <span className="font-medium text-brand-600">Upgrade to Premium for ad-free experience.</span>
           </p>
         </div>

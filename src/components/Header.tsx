@@ -8,7 +8,10 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <FileSearch className="h-8 w-8 text-brand-600" />
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-brand-700 to-brand-500 bg-clip-text text-transparent">ResumeAI</h1>
+          <div>
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-brand-700 to-brand-500 bg-clip-text text-transparent">ResumeAI</h1>
+            <p className="text-xs text-muted-foreground -mt-1">Don't let a weak resume hold you back</p>
+          </div>
         </div>
         <nav>
           <ul className="flex items-center gap-6">

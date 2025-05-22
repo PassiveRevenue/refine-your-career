@@ -56,10 +56,13 @@ const PremiumFeatures: React.FC = () => {
 
   return (
     <div className="py-12">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold mb-4">Choose Your Plan</h2>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+      <div className="text-center mb-8">
+        <h2 className="text-3xl font-bold mb-2">Choose Your Plan</h2>
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-2">
           Get the competitive edge with our AI-powered resume analysis tools
+        </p>
+        <p className="text-lg font-semibold text-brand-600 max-w-2xl mx-auto">
+          Don't let a weak resume hold you back.
         </p>
       </div>
       

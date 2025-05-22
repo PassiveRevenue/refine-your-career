@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -35,13 +34,17 @@ const Index = () => {
       <main className="flex-grow">
         <section className="py-16 bg-gradient-to-b from-brand-50 to-background">
           <div className="container px-4 mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
               Perfect Your Resume with <span className="text-brand-600">AI-Powered</span> Feedback
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+            <p className="text-xl mb-2 text-muted-foreground max-w-3xl mx-auto">
               Get instant, professional feedback on your resume and cover letter. 
               Optimize for ATS systems and stand out to hiring managers.
             </p>
+            <p className="text-xl font-semibold text-brand-600 mb-8 max-w-2xl mx-auto">
+              Don't let a weak resume hold you back.
+            </p>
+            
             <div className="flex flex-wrap gap-4 justify-center">
               <Button 
                 size="lg" 
@@ -187,8 +190,11 @@ const Index = () => {
               <Star className="h-8 w-8 text-brand-600" />
             </div>
             <h2 className="text-3xl font-bold mb-4">Start Improving Your Resume Today</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-2">
               Try our free, ad-supported analysis or upgrade for premium features.
+            </p>
+            <p className="text-xl font-semibold text-brand-600 mb-6 max-w-2xl mx-auto">
+              Don't let a weak resume hold you back.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button 
