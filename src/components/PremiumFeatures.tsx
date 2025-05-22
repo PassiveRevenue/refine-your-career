@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Check, BadgeDollarSign, CreditCard, Ad } from 'lucide-react';
+import { Check, BadgeDollarSign, CreditCard, Megaphone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PricingTier } from '../types';
 
@@ -84,7 +84,7 @@ const PremiumFeatures: React.FC = () => {
             {tier.adSupported && (
               <div className="absolute top-0 left-0">
                 <div className="bg-yellow-500 text-white text-xs font-semibold px-3 py-1 rounded-br-lg flex items-center gap-1">
-                  <Ad className="h-3 w-3" />
+                  <Megaphone className="h-3 w-3" />
                   Ad Supported
                 </div>
               </div>

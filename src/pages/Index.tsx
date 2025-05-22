@@ -9,7 +9,7 @@ import AdOverlay from '@/components/AdOverlay';
 import { useResumeAnalysis } from '@/hooks/useResumeAnalysis';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Calendar, Check, SearchCheck, Star, Ad } from 'lucide-react';
+import { Calendar, Check, SearchCheck, Star, Megaphone } from 'lucide-react';
 
 const Index = () => {
   const {
@@ -63,7 +63,7 @@ const Index = () => {
             </div>
             
             <div className="mt-8 inline-flex items-center gap-2 text-muted-foreground text-sm bg-muted/50 px-3 py-1 rounded-full">
-              <Ad className="h-4 w-4 text-yellow-500" />
+              <Megaphone className="h-4 w-4 text-yellow-500" />
               <span>Free tier now available with ad-supported analysis!</span>
             </div>
           </div>
@@ -155,7 +155,7 @@ const Index = () => {
                         
                         <div className="mt-4 text-xs text-muted-foreground">
                           <div className="flex items-center justify-center gap-2">
-                            <Ad className="h-3 w-3 text-yellow-500" />
+                            <Megaphone className="h-3 w-3 text-yellow-500" />
                             <span>Free tier users must watch a brief advertisement before analysis</span>
                           </div>
                         </div>

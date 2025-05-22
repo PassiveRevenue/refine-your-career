@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { AdState } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Ad } from 'lucide-react';
+import { Megaphone } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface AdOverlayProps {
@@ -51,7 +51,7 @@ const AdOverlay: React.FC<AdOverlayProps> = ({ adState, onAdComplete, onClose })
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <Ad className="h-5 w-5 text-brand-600" />
+            <Megaphone className="h-5 w-5 text-brand-600" />
             Watch Ad to Continue
           </DialogTitle>
         </DialogHeader>
@@ -60,7 +60,7 @@ const AdOverlay: React.FC<AdOverlayProps> = ({ adState, onAdComplete, onClose })
           <div className="bg-muted w-full h-48 mb-4 flex items-center justify-center rounded-md overflow-hidden relative">
             <div className="absolute inset-0 flex items-center justify-center bg-brand-50/50">
               <div className="text-center">
-                <Ad className="h-16 w-16 text-brand-600/30 mx-auto mb-2" />
+                <Megaphone className="h-16 w-16 text-brand-600/30 mx-auto mb-2" />
                 <p className="text-sm text-muted-foreground">
                   {adState.isPlaying 
                     ? `Watching advertisement (${Math.round(adDuration - (adDuration * adProgress / 100))}s)` 
