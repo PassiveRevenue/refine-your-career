@@ -4,31 +4,33 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Megaphone } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-
 interface AdOverlayProps {
   adState: AdState;
   onAdComplete: () => void;
   onClose: () => void;
 }
-
-const AdOverlay: React.FC<AdOverlayProps> = ({ adState, onAdComplete, onClose }) => {
+const AdOverlay: React.FC<AdOverlayProps> = ({
+  adState,
+  onAdComplete,
+  onClose
+}) => {
   const [adProgress, setAdProgress] = useState<number>(0);
   const [adDuration] = useState<number>(10); // Ad duration in seconds
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    
     if (adState.isPlaying && adProgress < 100) {
       interval = setInterval(() => {
         setAdProgress(prev => {
-          const newProgress = prev + (100 / adDuration);
+          const newProgress = prev + 100 / adDuration;
           if (newProgress >= 100) {
             // Ad completed
             clearInterval(interval);
             toast({
               title: "Ad completed",
-              description: "Thank you for watching. Your free analysis is now available.",
+              description: "Thank you for watching. Your free analysis is now available."
             });
             onAdComplete();
             return 100;
@@ -37,16 +39,13 @@ const AdOverlay: React.FC<AdOverlayProps> = ({ adState, onAdComplete, onClose })
         });
       }, 1000);
     }
-    
     return () => {
       if (interval) clearInterval(interval);
     };
   }, [adState.isPlaying, adProgress, adDuration, onAdComplete, toast]);
-
-  return (
-    <Dialog open={adState.required && !adState.watched} onOpenChange={(open) => {
-      if (!open) onClose();
-    }}>
+  return <Dialog open={adState.required && !adState.watched} onOpenChange={open => {
+    if (!open) onClose();
+  }}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
@@ -61,57 +60,41 @@ const AdOverlay: React.FC<AdOverlayProps> = ({ adState, onAdComplete, onClose })
               <div className="text-center">
                 <Megaphone className="h-16 w-16 text-brand-600/30 mx-auto mb-2" />
                 <p className="text-sm text-muted-foreground">
-                  {adState.isPlaying 
-                    ? `Watching advertisement (${Math.round(adDuration - (adDuration * adProgress / 100))}s)` 
-                    : "Click play to watch advertisement"}
+                  {adState.isPlaying ? `Watching advertisement (${Math.round(adDuration - adDuration * adProgress / 100)}s)` : "Click play to watch advertisement"}
                 </p>
               </div>
             </div>
           </div>
           
-          {adState.isPlaying ? (
-            <div className="w-full">
+          {adState.isPlaying ? <div className="w-full">
               <div className="h-2 bg-muted rounded-full overflow-hidden">
-                <div 
-                  className="bg-brand-600 h-2 transition-all duration-300 ease-linear rounded-full"
-                  style={{ width: `${adProgress}%` }}
-                />
+                <div className="bg-brand-600 h-2 transition-all duration-300 ease-linear rounded-full" style={{
+              width: `${adProgress}%`
+            }} />
               </div>
               <p className="text-xs text-center mt-1 text-muted-foreground">
-                {adProgress < 100 
-                  ? `Please wait ${Math.round(adDuration - (adDuration * adProgress / 100))} seconds...` 
-                  : "Ad completed!"}
+                {adProgress < 100 ? `Please wait ${Math.round(adDuration - adDuration * adProgress / 100)} seconds...` : "Ad completed!"}
               </p>
-            </div>
-          ) : (
-            <Button 
-              onClick={() => {
-                toast({
-                  title: "Advertisement started",
-                  description: "Please watch the entire ad to continue.",
-                });
-                setAdProgress(0);
-                onAdComplete(); // For demo purposes, allow skipping in real implementation
-              }}
-              className="bg-brand-600 hover:bg-brand-700"
-            >
+            </div> : <Button onClick={() => {
+          toast({
+            title: "Advertisement started",
+            description: "Please watch the entire ad to continue."
+          });
+          setAdProgress(0);
+          onAdComplete(); // For demo purposes, allow skipping in real implementation
+        }} className="bg-brand-600 hover:bg-brand-700">
               Play Advertisement
-            </Button>
-          )}
+            </Button>}
           
           <p className="text-sm text-muted-foreground mt-4 text-center">
             Watch this advertisement to unlock your free monthly resume analysis.
           </p>
-          <p className="text-sm font-medium text-brand-600 mt-1 text-center">
-            Don't let a weak resume hold you back.
-          </p>
+          
           <p className="text-sm text-muted-foreground mt-4 text-center">
             <span className="font-medium text-brand-600">Upgrade to Premium for ad-free experience.</span>
           </p>
         </div>
       </DialogContent>
-    </Dialog>
-  );
+    </Dialog>;
 };
-
 export default AdOverlay;
