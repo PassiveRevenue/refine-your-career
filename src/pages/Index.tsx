@@ -160,9 +160,7 @@ const Index = () => {
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-2">
               Try our free, ad-supported analysis or upgrade for premium features.
             </p>
-            <p className="text-xl font-semibold text-brand-600 mb-6 max-w-2xl mx-auto">
-              Don't let a weak resume hold you back.
-            </p>
+            <p className="text-xl font-semibold text-brand-600 mb-6 max-w-2xl mx-auto">Take the first step toward your dream job</p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button size="lg" className="bg-brand-600 hover:bg-brand-700" onClick={() => document.getElementById('analyze-section')?.scrollIntoView({
               behavior: 'smooth'
