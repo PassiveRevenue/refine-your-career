@@ -32,7 +32,7 @@ const PremiumFeatures: React.FC = () => {
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-2">
           Get the competitive edge with our AI-powered resume analysis tools
         </p>
-        <p className="text-lg font-semibold text-brand-600 max-w-2xl mx-auto">Your career deserves a powerful first impression</p>
+        <p className="text-lg font-semibold text-brand-600 max-w-2xl mx-auto">Unlock your career potential with premium analysis</p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
